@@ -6,10 +6,23 @@ const CategoryForm = () => {
     title: "",
     description: "",
   });
+  const [categories, setCategories] = useState([]);
+
   const changeHandler = (e) => {
     const { name, value } = e.target;
     setCategoryFormData({ ...categoryFormData, [name]: value });
   };
+
+  const addNewCategoryHandler = (e) => {
+    e.preventDefault();
+    const newCategory = {
+      ...categoryFormData,
+      createAt: new Date().toISOString(),
+    };
+    setCategories((prevState) => [...prevState, newCategory]);
+    setCategoryFormData({ title: "", description: "" });
+  };
+
   return (
     <section>
       <div className={`mb-6 ${isShow ? "" : "hidden"}`} id="category-wrapper">
@@ -61,6 +74,7 @@ const CategoryForm = () => {
               Cancel
             </button>
             <button
+              onClick={addNewCategoryHandler}
               id="add-new-category"
               className="flex-1 bg-slate-500 text-slate-200 rounded-xl py-2"
             >
