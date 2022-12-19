@@ -2,6 +2,14 @@ import { useState } from "react";
 
 const CategoryForm = () => {
   const [isShow, setIsShow] = useState(false);
+  const [categoryFormData, setCategoryFormData] = useState({
+    title: "",
+    description: "",
+  });
+  const changeHandler = (e) => {
+    const { name, value } = e.target;
+    setCategoryFormData({ ...categoryFormData, [name]: value });
+  };
   return (
     <section>
       <div className={`mb-6 ${isShow ? "" : "hidden"}`} id="category-wrapper">
@@ -11,28 +19,34 @@ const CategoryForm = () => {
         <form className="bg-slate-700 p-4 rounded-xl flex flex-col gap-y-4">
           <div>
             <label
-              for="category-title"
+              htmlFor="category-title"
               className="block mb-1 w-2 text-slate-400"
             >
               title
             </label>
             <input
-              type="text"
-              name="category-title"
-              id="category-title"
               className="bg-transparent rounded-xl border border-slate-500 text-slate-400 w-full md:w-auto"
+              type="text"
+              id="category-title"
+              name="title"
+              value={categoryFormData.title}
+              onChange={changeHandler}
             />
           </div>
           <div>
             <label
-              for="category-description"
+              htmlFor="category-description"
               className="block mb-1 text-slate-400"
             >
               description
             </label>
             <textarea
-              type="text"
               className="bg-transparent rounded-xl border border-slate-500 text-slate-400 w-full"
+              type="text"
+              id="category-description"
+              name="description"
+              value={categoryFormData.description}
+              onChange={changeHandler}
             ></textarea>
           </div>
           <div className="flex items-center justify-between gap-x-4">
