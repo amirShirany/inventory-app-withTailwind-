@@ -1,12 +1,12 @@
+import { data } from "autoprefixer";
 import { useState } from "react";
 
-const CategoryForm = () => {
+const CategoryForm = ({ setCategories }) => {
   const [isShow, setIsShow] = useState(false);
   const [categoryFormData, setCategoryFormData] = useState({
     title: "",
     description: "",
   });
-  const [categories, setCategories] = useState([]);
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -18,6 +18,7 @@ const CategoryForm = () => {
     const newCategory = {
       ...categoryFormData,
       createAt: new Date().toISOString(),
+      id: new Date().getDate(),
     };
     setCategories((prevState) => [...prevState, newCategory]);
     setCategoryFormData({ title: "", description: "" });

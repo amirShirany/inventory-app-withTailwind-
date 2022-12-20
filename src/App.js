@@ -1,6 +1,8 @@
 import "./App.css";
-import Category from "./components/Category";
+import CategoryForm from "./components/Category";
 import NavBar from "./components/NavBar";
+import ProductsForm from "./components/Products";
+import { useState } from "react";
 
 const products = [
   {
@@ -39,12 +41,15 @@ const categories = [
 ];
 
 function App() {
+  const [categories, setCategories] = useState([]);
+
   return (
     <div>
       <div className="bg-slate-800  min-h-screen">
         <NavBar />
         <div className="container max-w-screen-sm mx-auto p-4">
-          <Category />
+          <CategoryForm setCategories={setCategories} />
+          <ProductsForm categories={categories} />
         </div>
       </div>
     </div>
