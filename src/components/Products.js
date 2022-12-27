@@ -1,4 +1,29 @@
-const productsForm = ({ categories }) => {
+import { useState } from "react";
+
+const ProductsForm = ({ categories }) => {
+  const [productsFormData, setProductsFormData] = useState({
+    title: " ",
+    quantity: "",
+    categoryId: "",
+  });
+  const [products, setProducts] = useState("");
+
+  const changeHandler = (e) => {
+    const { name, value } = e.target;
+    setProductsFormData({ ...productsFormData, [name]: value });
+  };
+
+  const addNewProduct = (e) => {
+    e.preventDefault();
+    const newProduct = {
+      ...productsFormData,
+      createAt: new Date().toISOString(),
+      id: new Date().getTime(),
+    };
+    setProducts((prevState) => [...prevState, newProduct]);
+    setProductsFormData({ title: "", description: "", categoryId: "" });
+  };
+
   return (
     <div className="mb-6">
       <h2 className="text-xl text-slate-300 font-bold mb-2">Add New Product</h2>
@@ -9,9 +34,11 @@ const productsForm = ({ categories }) => {
           </label>
           <input
             type="text"
-            name="product-title"
+            name="title"
             id="product-title"
             className="bg-transparent rounded-xl border border-slate-500 text-slate-400 w-full md:w-auto"
+            value={productsFormData.title}
+            onChange={changeHandler}
           ></input>
         </div>
         <div>
@@ -23,9 +50,11 @@ const productsForm = ({ categories }) => {
           </label>
           <input
             type="number"
-            name="product-quantity"
+            name="quantity"
             id="product-quantity"
             className="bg-transparent rounded-xl border border-slate-500 text-slate-400 w-full md:w-auto"
+            value={productsFormData.quantity}
+            onChange={changeHandler}
           ></input>
         </div>
         <div>
@@ -36,16 +65,18 @@ const productsForm = ({ categories }) => {
             category
           </label>
           <select
-            name="product-category"
-            id="product-category"
+            name="categoryId"
+            id="category"
             className="bg-transparent text-slate-400 rounded-xl w-full"
+            value={productsFormData.categoryId}
+            onChange={changeHandler}
           >
             {categories.map((category) => {
               return (
                 <option
                   key={category.id}
                   className="bg-slate-500 text-slate-300"
-                  value=""
+                  value={category.id}
                 >
                   {category.title}
                 </option>
@@ -55,10 +86,11 @@ const productsForm = ({ categories }) => {
         </div>
         <div className="flex items-center justify-between gap-x-4">
           <button
+            onClick={addNewProduct}
             id="add-new-product"
             className="flex-1 bg-slate-500 text-slate-200 rounded-xl py-2"
           >
-            Product
+            Add New Product
           </button>
         </div>
       </form>
@@ -66,4 +98,4 @@ const productsForm = ({ categories }) => {
   );
 };
 
-export default productsForm;
+export default ProductsForm;

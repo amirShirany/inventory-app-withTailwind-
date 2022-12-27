@@ -1,4 +1,3 @@
-import { data } from "autoprefixer";
 import { useState } from "react";
 
 const CategoryForm = ({ setCategories }) => {
@@ -18,7 +17,7 @@ const CategoryForm = ({ setCategories }) => {
     const newCategory = {
       ...categoryFormData,
       createAt: new Date().toISOString(),
-      id: new Date().getDate(),
+      id: new Date().getTime(),
     };
     setCategories((prevState) => [...prevState, newCategory]);
     setCategoryFormData({ title: "", description: "" });
