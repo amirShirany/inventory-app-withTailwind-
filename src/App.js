@@ -1,47 +1,13 @@
 import "./App.css";
-import CategoryForm from "./components/Category";
-import NavBar from "./components/NavBar";
-import ProductsForm from "./components/Products";
 import { useState } from "react";
-
-const products = [
-  {
-    id: 1,
-    title: "React.js",
-    category: "frontend",
-    createAt: "2021-10-31T15:02:00.411Z",
-  },
-  {
-    id: 2,
-    title: "Node.js",
-    category: "backend",
-    createAt: "2021-10-31T15:03:23.556Z",
-  },
-  {
-    id: 3,
-    title: "Vue.js",
-    category: "frontend",
-    createAt: "2021-11-01T10:47:26.889Z",
-  },
-];
-
-const categories = [
-  {
-    id: 1,
-    title: "frontend",
-    description: "frontend of applications",
-    createAt: "2021-11-01T10:47:26.889Z",
-  },
-  {
-    id: 2,
-    title: "backend",
-    description: "the backend of the applications",
-    createAt: "2021-10-01T10:47:26.889Z",
-  },
-];
+import NavBar from "./components/NavBar";
+import CategoryForm from "./components/CategoryForm";
+import ProductsForm from "./components/ProductsForm";
+import ProductList from "./components/ProductList";
 
 function App() {
   const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState("");
 
   return (
     <div>
@@ -49,7 +15,8 @@ function App() {
         <NavBar />
         <div className="container max-w-screen-sm mx-auto p-4">
           <CategoryForm setCategories={setCategories} />
-          <ProductsForm categories={categories} />
+          <ProductsForm categories={categories} setProducts={setProducts} />
+          <ProductList products={products} />
         </div>
       </div>
     </div>
