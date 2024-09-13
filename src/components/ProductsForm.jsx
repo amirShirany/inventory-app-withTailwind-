@@ -1,28 +1,4 @@
-import { useState } from "react";
-
 const ProductsForm = ({ categories, setProducts }) => {
-  const [productsFormData, setProductsFormData] = useState({
-    title: " ",
-    quantity: "",
-    categoryId: "",
-  });
-
-  const changeHandler = (e) => {
-    const { name, value } = e.target;
-    setProductsFormData({ ...productsFormData, [name]: value });
-  };
-
-  const addNewProduct = (e) => {
-    e.preventDefault();
-    const newProduct = {
-      ...productsFormData,
-      createAt: new Date().toISOString(),
-      id: new Date().getTime(),
-    };
-    setProducts((prevState) => [...prevState, newProduct]);
-    setProductsFormData({ title: "", description: "", categoryId: "" });
-  };
-
   return (
     <div className="mb-6">
       <h2 className="text-xl text-slate-300 font-bold mb-2">Add New Product</h2>
@@ -36,8 +12,6 @@ const ProductsForm = ({ categories, setProducts }) => {
             name="title"
             id="product-title"
             className="bg-transparent rounded-xl border border-slate-500 text-slate-400 w-full md:w-auto"
-            value={productsFormData.title}
-            onChange={changeHandler}
           ></input>
         </div>
         <div>
@@ -52,8 +26,6 @@ const ProductsForm = ({ categories, setProducts }) => {
             name="quantity"
             id="product-quantity"
             className="bg-transparent rounded-xl border border-slate-500 text-slate-400 w-full md:w-auto"
-            value={productsFormData.quantity}
-            onChange={changeHandler}
           ></input>
         </div>
         <div>
@@ -67,8 +39,6 @@ const ProductsForm = ({ categories, setProducts }) => {
             name="categoryId"
             id="category"
             className="bg-transparent text-slate-400 rounded-xl w-full"
-            value={productsFormData.categoryId}
-            onChange={changeHandler}
           >
             {categories.map((category) => {
               return (
@@ -79,13 +49,12 @@ const ProductsForm = ({ categories, setProducts }) => {
                 >
                   {category.title}
                 </option>
-              );
+              )
             })}
           </select>
         </div>
         <div className="flex items-center justify-between gap-x-4">
           <button
-            onClick={addNewProduct}
             id="add-new-product"
             className="flex-1 bg-slate-500 text-slate-200 rounded-xl py-2"
           >
@@ -94,7 +63,7 @@ const ProductsForm = ({ categories, setProducts }) => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default ProductsForm;
+export default ProductsForm

@@ -8,7 +8,7 @@ const CategoryForm = ({ setCategories }) => {
   })
 
   const changeHandler = (e) => {
-    const { name, value } = e.target
+    const { value, name } = e.target
     setCategoryFormData({ ...categoryFormData, [name]: value })
   }
 
@@ -16,11 +16,9 @@ const CategoryForm = ({ setCategories }) => {
     e.preventDefault()
     const newCategory = {
       ...categoryFormData,
-      createAt: new Date().toISOString(),
-      id: new Date().getTime(),
+      cratedAt: new Date().toISOString(),
     }
     setCategories((prevState) => [...prevState, newCategory])
-    setCategoryFormData({ title: "", description: "" })
   }
 
   return (
@@ -29,6 +27,7 @@ const CategoryForm = ({ setCategories }) => {
         <h2 className="text-xl text-slate-300 font-bold mb-2">
           Add New Category
         </h2>
+
         <form className="bg-slate-700 p-4 rounded-xl flex flex-col gap-y-4">
           <div>
             <label
@@ -62,36 +61,34 @@ const CategoryForm = ({ setCategories }) => {
               onChange={changeHandler}
             ></textarea>
           </div>
+
           <div className="flex items-center justify-between gap-x-4">
             <button
               id="cancel-add-category"
               className="flex-1 border border-slate-400 text-slate-400 rounded-xl py-2"
-              onClick={(e) => {
-                e.preventDefault()
-                setIsShow(false)
-              }}
             >
               Cancel
             </button>
             <button
-              onClick={addNewCategoryHandler}
               id="add-new-category"
               className="flex-1 bg-slate-500 text-slate-200 rounded-xl py-2"
+              onClick={addNewCategoryHandler}
             >
               Add Category
             </button>
           </div>
         </form>
       </div>
-      <button
+
+      <p
         id="toggle-add-cetegory"
-        className={`text-slate-600 text-lg mb-4 font-medium ${
+        onClick={() => setIsShow((prevState) => !prevState)}
+        className={`text-slate-300 text-lg mb-4 font-medium hover:cursor-pointer ${
           isShow && "hidden"
         }`}
-        onClick={() => setIsShow((prevState) => !prevState)}
       >
         Add new Category?
-      </button>
+      </p>
     </section>
   )
 }
