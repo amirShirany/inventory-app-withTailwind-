@@ -17,6 +17,7 @@ const CategoryForm = ({ setCategories }) => {
     const newCategory = {
       ...categoryFormData,
       cratedAt: new Date().toISOString(),
+      id: new Date().getTime(),
     }
     setCategories((prevState) => [...prevState, newCategory])
   }
@@ -64,7 +65,10 @@ const CategoryForm = ({ setCategories }) => {
 
           <div className="flex items-center justify-between gap-x-4">
             <button
-              id="cancel-add-category"
+              onClick={(e) => {
+                e.preventDefault()
+                setIsShow(false)
+              }}
               className="flex-1 border border-slate-400 text-slate-400 rounded-xl py-2"
             >
               Cancel

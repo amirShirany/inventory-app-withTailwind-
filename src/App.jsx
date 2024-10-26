@@ -39,6 +39,7 @@ import { useState } from "react"
 import NavBar from "./components/NavBar"
 import CategoryForm from "./components/CategoryForm"
 import ProductsForm from "./components/ProductsForm"
+import Request from "./components/Request"
 
 function App() {
   const [categories, setCategories] = useState([])
@@ -52,6 +53,7 @@ function App() {
           <CategoryForm setCategories={setCategories} />
           <ProductsForm categories={categories} />
           {/* <ProductList /> */}
+          <Request />
         </div>
       </div>
     </div>
